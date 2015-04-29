@@ -2,15 +2,14 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'go_chanel'
-require 'pry'
 Gem::Specification.new do |spec|
   spec.name          = "go_chanel"
   spec.version       = GoChanel::VERSION
   spec.authors       = ["xuxiangyang"]
   spec.email         = ["xxy@creatingev.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{simulate golang channel}
+  spec.description   = %q{simulate golang channel}
+  spec.homepage      = "https://github.com/xuxiangyang/go_chanel"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
