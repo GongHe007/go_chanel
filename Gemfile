@@ -1,4 +1,8 @@
-source 'https://rubygems.org'
+source 'http://ruby.taobao.org'
 
-# Specify your gem's dependencies in go_chanel.gemspec
 gemspec
+
+group :development, :test do
+  gem 'pry', '~> 0.10.1'
+  gem 'mocha', :require => false
+end

@@ -1,5 +1,10 @@
 require "go_chanel/version"
+require "go_chanel/chanel"
 
 module GoChanel
-  # Your code goes here...
+  def self.go(&proc)
+    Thread.new do
+      proc.call
+    end
+  end
 end
