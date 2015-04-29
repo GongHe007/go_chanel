@@ -28,6 +28,10 @@ module GoChanel
       end
     end
 
+    def size
+      @objs.count
+    end
+
     def pop
       return nil, false if @closed && @objs.empty?
 
