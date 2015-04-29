@@ -29,13 +29,17 @@ module GoChanel
     end
 
     def pop
+      return nil, false if @closed && @objs.empty?
+
       while @objs.count == 0 do
         sleep(0.5)
       end
 
-      @mutex.synchronize do
+      obj = @mutex.synchronize do
         @objs.shift
       end
+
+      return obj, true
     end
 
     def close
