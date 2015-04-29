@@ -1,6 +1,5 @@
 # GoChanel
-
-TODO: Write a gem description
+模仿golang中的channel。chanel是因为我拼写错了。。。。
 
 ## Installation
 
