@@ -5,7 +5,9 @@ class TestGo < Test::Unit::TestCase
     finish_push_chanel = GoChanel::Chanel.new
     finish_pop_chanel = GoChanel::Chanel.new
     chanel = GoChanel::Chanel.new
-    GoChanel.go do
+    b = 1
+    GoChanel.go(b) do |a|
+      puts a
       chanel.push(1)
       finish_push_chanel.push(true)
     end
