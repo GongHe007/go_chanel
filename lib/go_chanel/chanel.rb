@@ -10,7 +10,8 @@ module GoChanel
     def initialize(cap_size = 1, objs = [])
       raise ChanelException.new("can not create a 0 size channel") if cap_size < 1
 
-      @mutex = Mutex.new
+      @obj_mutex = Mutex.new
+      @close_mutex = Mutex.new
       @cap_size = cap_size
       @objs = objs
       @closed = false
@@ -20,34 +21,40 @@ module GoChanel
       raise ChanelException.new("can not push to closed channel") if @closed
 
       while @objs.count >= @cap_size do
-        sleep(0.5)
+        raise ChanelException.new("can not push to closed channel") if @closed
+        sleep(0.1)
       end
 
-      @mutex.synchronize do
+      @obj_mutex.synchronize do
         @objs.push(obj)
       end
     end
 
-    def size
-      @objs.count
-    end
-
     def pop
-      return nil, false if @closed && @objs.empty?
-
       while @objs.count == 0 do
-        sleep(0.5)
+        return nil, false if @closed
+        sleep(0.1)
       end
 
-      obj = @mutex.synchronize do
+      obj = @obj_mutex.synchronize do
         @objs.shift
       end
 
       return obj, true
     end
 
+    def size
+      @objs.count
+    end
+
+    def cap
+      @cap_size
+    end
+
     def close
-      @closed = true
+      @close_mutex.synchronize do
+        @closed = true
+      end
     end
   end
 
