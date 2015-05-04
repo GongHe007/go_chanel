@@ -11,6 +11,7 @@ module GoChanel
 
     def self.notify(e)
       if @@std_out
+        puts "Something wrong in Thread:"
         puts e
         puts e.backtrace
       end
