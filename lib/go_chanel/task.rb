@@ -29,12 +29,13 @@ module GoChanel
       concurrence_chan = GoChanel::Chanel.new
       Thread.new do
         begin
-          out_chan.push(proc.call(*args))
+          [proc.call(*args)].flatten.each do |result|
+            out_chan.push(result)
+          end
         rescue => e
           GoChanel::ErrNotifier.notify(e)
         ensure
           concurrence_chan.push(true)
-
         end
       end
       concurrence_chan.pop

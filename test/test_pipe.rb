@@ -4,8 +4,8 @@ require 'pry'
 class TestPipe < Test::Unit::TestCase
   def test_pipe
     count = 0
-    pool1 = GoChanel::Pool.new do
-      1
+    pool1 = GoChanel::Pool.new do |i|
+      [1]
     end
 
     pool2 = GoChanel::Pool.new do |i|
