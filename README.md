@@ -124,7 +124,7 @@ pipe.run
 ###很重要：记住Thread和Progress的区别
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/go_chanel/fork )
+1. Fork it ( https://github.com/xuxiangyang/go_chanel/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
