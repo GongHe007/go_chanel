@@ -84,8 +84,44 @@ def func2(in_chan)
 end
 ```
 
+###并发的Pipe
+类似于linux中的pipe，一个pipe的定义是这样的
+* 由至少2个pool组成
+* 分为三类pool，头、中间、尾。头只有一个out_chan, 中间的有一个in_chan也有一个out_chan, 尾只有一个in_chan
+* 对于中间和尾部的pool, 前一个pool的block返回值应该可以作为下一个pool block的输入
+* 头pool比较特殊，其实他是单线程执行的，因为一般头pool是重cpu的操作，分成多个thread也没有意义，它的返回值是一个array，依次传递给下一个pool
+用法如下,还是完成上一个复杂的例子，就会很简单
 
+```ruby
+pool1 = GoChanel::Pool.new(1) do
+  1024.times.to_a
+end
+pool2 = GoChanle::Pool.new(512) do |i|
+  puts i
+end
+pipe = pool1 | pool2
+pipe.run
+```
 
+另一个例子
+
+```ruby
+pool1 = GoChanel::Pool.new do
+  1024.times.map do |i|
+    [i + 1, i + 2]
+  end
+end
+pool2 = GoChanel::Pool.new(128) do |i, j|
+  i + j #一般为IO操作，这里就最简单的表示了
+end
+pool3 = GoChanel::Pool.new(32) do |i|
+  puts i
+end
+pipe = pool1 | pool2 | pool3
+pipe.run
+```
+
+###很重要：记住Thread和Progress的区别
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/go_chanel/fork )
