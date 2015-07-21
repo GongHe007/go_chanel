@@ -9,6 +9,10 @@ module GoChanel
       raise "notifier should have a func named as" unless notifier.respond_to?(:notify)
     end
 
+    def self.std_out=(open = true)
+      @@std_out = open
+    end
+
     def self.notify(e)
       if @@std_out
         puts "Something wrong in Thread:"
