@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name          = "go_chanel"
   spec.version       = GoChanel::VERSION
   spec.authors       = ["xuxiangyang"]
-  spec.email         = ["xxy@creatingev.com"]
+  spec.email         = ["54049924@qq.com"]
   spec.summary       = %q{simulate golang channel}
   spec.description   = %q{simulate golang channel}
   spec.homepage      = "https://github.com/xuxiangyang/go_chanel"
